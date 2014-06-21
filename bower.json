@@ -1,0 +1,9 @@
+{
+  "name": "key-frame-js",
+  "private": true,
+  "dependencies": {
+    "jquery": "~1.11.0",
+    "modular-scale": "~2.0.5"
+  },
+  "devDependencies": {}
+}
