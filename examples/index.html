@@ -1,0 +1,235 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <title>key frame js</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+
+</head>
+<body>
+
+<ul id="main">
+    <li id="wakeUp-demo" class="clearfix">
+        <h1>wakeUp (without jquery plugin)</h1>
+
+        <div class="side">
+            <ul class="action-list clearfix">
+                <li class="run">run</li>
+                <li class="reset">reset</li>
+            </ul>
+        </div>
+        <div class="demo-co">
+            <!--here the content-->
+            <div></div>
+        </div>
+    </li>
+    <li id="wakeUp-jquery-demo" class="clearfix">
+        <h1>wakeUp (with jquery plugin)</h1>
+
+        <div class="side">
+            <ul class="action-list clearfix">
+                <li class="create">create</li>
+                <li class="remove disabled">remove & clean</li>
+                <li class="play disabled">play</li>
+                <li class="pause disabled">pause</li>
+                <li class="resume disabled">resume</li>
+                <li class="clean disabled">clean</li>
+            </ul>
+        </div>
+        <div class="demo-co">
+            <!--here the content-->
+            <div></div>
+        </div>
+    </li>
+</ul>
+
+<!-- build:js scripts/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- build:js scripts/main.js -->
+<script src="scripts/kf.js"></script>
+<script src="scripts/jquery.kf.js"></script>
+<!-- endbuild -->
+
+
+
+<style>
+    #wakeUp-demo .demo-co > div, #wakeUp-jquery-demo .demo-co > div {
+        width: 200px;
+        height: 123px;
+        background: darkorange;
+        border-radius: 5px;
+        margin: 0 auto;
+
+        -webkit-transform-origin: 50% 100%;
+        transform-origin: 50% 100%;
+    }
+</style>
+<script>
+    kf.template.wakeUp = function (perspective, name) {
+        var per0 = 'perspective(' + perspective + 'px) rotateX(90deg)',
+                per60 = 'perspective(' + perspective + 'px) rotateX(-8deg)',
+                per62 = 'perspective(' + perspective + 'px) rotateX(8deg)',
+                per70 = 'perspective(' + perspective + 'px) rotateX(-6deg)',
+                per76 = 'perspective(' + perspective + 'px) rotateX(6deg)',
+                per84 = 'perspective(' + perspective + 'px) rotateX(-3deg)',
+                per92 = 'perspective(' + perspective + 'px) rotateX(3deg)',
+                per100 = 'perspective(' + perspective + 'px) rotateX(0deg)';
+
+        return {
+            name: name || 'wakeUp',
+            '0%': { '-webkit-transform': per0, transform: per0 },
+            '60%': { '-webkit-transform': per60, transform: per60 },
+            '62%': { '-webkit-transform': per62, transform: per62 },
+            '70%': { '-webkit-transform': per70, transform: per70 },
+            '76%': { '-webkit-transform': per76, transform: per76 },
+            '84%': { '-webkit-transform': per84, transform: per84 },
+            '92%': { '-webkit-transform': per92, transform: per92 },
+            '100%': { '-webkit-transform': per100, transform: per100 }
+        }
+    };
+</script>
+
+<script>
+    var kfName = kf.create(kf.template.wakeUp('400'));
+
+    $(function () {
+
+        $('#wakeUp-demo').on('click', '.run', function (e) {
+
+            var $target = $('#wakeUp-demo > .demo-co > div');
+
+            $target.addClass('wakeUp');
+
+            //[animation-name] [animation-duration] [animation-timing-function] [animation-delay] [animation-iteration-count] [animation-direction] [animation-fill-mode] [animation-play-state]
+            $target
+                    .css('animation', 'wakeUp 1.8s')
+                    .on('animationend webkitAnimationEnd mozAnimationEnd oAnimationEnd MSAnimationEnd', function () {
+                        console.log(9);
+                    })
+                    .on('animationiteration webkitAnimationIteration mozAnimationIteration MSAnimationIteration oAnimationIteration', function () {
+                        console-log(1);
+                    });
+
+        }).on('click', '.reset', function (e) {
+
+            var $target = $('#wakeUp-demo > .demo-co > div');
+
+            $target.css('animation', '')
+
+        });
+
+
+    });
+</script>
+
+<script>
+    $(function () {
+
+        var $demo = $('#wakeUp-jquery-demo'),
+                $target = $demo.find('.demo-co > div'),
+                $create = $demo.find('.create'),
+                $remove = $demo.find('.remove'),
+                $play = $demo.find('.play'),
+                $pause = $demo.find('.pause'),
+                $resume = $demo.find('.resume'),
+                $clean = $demo.find('.clean');
+
+        $demo.on('click', '.create:not(.disabled)', function (e) {
+
+            kf.create(kf.template.wakeUp('800', 'wakeUp-jquery'));
+
+            $create.addClass('disabled last');
+            $remove.removeClass('disabled');
+            $play.removeClass('disabled');
+            $pause.addClass('disabled');
+            $resume.addClass('disabled');
+            $clean.addClass('disabled');
+
+        }).on('click', '.remove:not(.disabled)', function (e) {
+
+            kf.remove('wakeUp-jquery');
+            $target.kf('clean');
+
+            $create.removeClass('disabled');
+            $remove.addClass('disabled last');
+            $play.addClass('disabled');
+            $pause.addClass('disabled');
+            $resume.addClass('disabled');
+            $clean.addClass('disabled');
+
+        }).on('click', '.play:not(.disabled)', function (e) {
+
+            $target.kf('play', {
+                name: 'wakeUp-jquery', // name of the keyframe you want to bind to the selected element
+                duration: 2000, // [optional, default: 0, in ms] how long you want it to last in milliseconds
+                timingFunction: 'linear', // [optional, default: ease] specifies the speed curve of the animation
+                delay: 0, //[optional, default: 0, in ms]  how long you want to wait before the animation starts in milliseconds, default value is 0
+                repeat: 'infinite', //[optional, default:1]  how many times you want the animation to repeat, default value is 1
+                direction: 'normal', //[optional, default: 'normal']  which direction you want the frames to flow, default value is normal
+                fillMode: 'forwards', //[optional, default: 'forward']  how to apply the styles outside the animation time, default value is forwards
+                complete: function () {
+                    console.log('daje');
+                }});
+
+            $create.addClass('disabled');
+            $remove.removeClass('disabled');
+            $play.addClass('disabled last');
+            $pause.removeClass('disabled');
+            $resume.addClass('disabled');
+            $clean.removeClass('disabled');
+
+        }).on('click', '.pause:not(.disabled)', function (e) {
+
+            $target.kf('pause');
+
+            $create.addClass('disabled');
+            $remove.removeClass('disabled');
+            $play.addClass('disabled');
+            $pause.addClass('disabled last');
+            $resume.removeClass('disabled');
+            $clean.removeClass('disabled');
+
+        }).on('click', '.resume:not(.disabled)', function (e) {
+
+            $target.kf('resume');
+
+            $create.addClass('disabled');
+            $remove.removeClass('disabled');
+            $play.addClass('disabled');
+            $pause.removeClass('disabled');
+            $resume.addClass('disabled last');
+            $clean.removeClass('disabled');
+
+        }).on('click', '.clean:not(.disabled)', function (e) {
+
+            $target.kf('clean');
+
+            $create.addClass('disabled');
+            $remove.removeClass('disabled');
+            $play.removeClass('disabled');
+            $pause.addClass('disabled');
+            $resume.addClass('disabled');
+            $clean.addClass('disabled last');
+
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

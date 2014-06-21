@@ -3,7 +3,8 @@
   "private": true,
   "dependencies": {
     "jquery": "~1.11.0",
-    "modular-scale": "~2.0.5"
+    "modular-scale": "~2.0.5",
+    "helper-scss": "eecolella/helper-scss"
   },
   "devDependencies": {}
 }
