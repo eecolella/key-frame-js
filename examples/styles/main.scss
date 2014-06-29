@@ -1,91 +1,84 @@
-
-@import "susy";
-
-//http://thesassway.com/projects/modular-scale
-@import "modular-scale/stylesheets/modular-scale";
-
 //http://compass-style.org/reference/compass/reset/utilities/
 @import "compass/reset";
+@import "../bower_components/grid-scss/grid";
+@import "typo";
 
-$base-font-size: 14px;
+//http://modularscale.com/scale/?px1=14&px2=20&ra1=1.618&ra2=0
+$base-gutter: 1.429rem;
 
+.page {
+    background: #fff;
+    .title {
+        text-align: center;
+        margin-bottom: $base-gutter*2;
+    }
+    ul {
+        list-style: none;
+        padding-bottom: $base-gutter;
 
-body {
-    background: #fafafa;
-    font-family: Arial, sans-serif;
-    color: #333;
+        > li {
+
+            border-radius: 5px;
+            background: #eee;
+
+            padding-right: $base-gutter;
+            margin-bottom: $base-gutter;
+
+            > h2 {
+                padding: $base-gutter 0 0 $base-gutter;
+            }
+
+            .side {
+
+                @include col(2, 1, 12, $base-gutter);
+                padding-left: $base-gutter;
+
+                .action-list {
+                    list-style: none;
+                    margin-bottom: -10px;
+
+                    > li {
+                        margin-bottom: 10px;
+                        text-align: center;
+                        font-weight: bold;
+                        background: #ccc;
+                        border-radius: 3px;
+                        padding: 5px 0;
+                        cursor: pointer;
+                        transition: background .3s;
+
+                        &:hover {
+                            background: #bbb;
+                        }
+                        &.disabled {
+                            background: #ccc;
+                            opacity: .4;
+                            cursor: default;
+                        }
+
+                    }
+
+                }
+
+            }
+            .main {
+
+                @include col(10, 3, 12, $base-gutter);
+
+                > div {
+                    background: url(bg.gif);
+                    overflow: hidden;
+                    border-radius: 5px;
+                    position: relative;
+                    margin-bottom: $base-gutter;
+                    padding: $base-gutter;
+                }
+            }
+        }
+
+    }
+
 }
 
+@import "../bower_components/helper-scss/helper";
 
-
-
-
-
-html, body{
-    margin: 0;
-    padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #3a3a3a;
-}
-#main{
-    list-style: none;
-    padding: 40px;
-    margin: 0;
-}
-#main > li{
-    margin-bottom: 40px;
-    border-radius: 5px;
-    background: #eee;
-    padding: 20px;
-}
-#main > li > h1{
-    font-size: 40px;
-    margin-bottom: 20px;
-}
-
-#main .side{
-    width: 100px;
-    float: left;
-    display: inline-block;
-    margin-right: 20px;
-}
-#main .side .action-list{
-    list-style: none;
-    margin-bottom: -10px;
-}
-#main .side .action-list > li{
-    margin-bottom: 10px;
-    text-align: center;
-    font-weight: bold;
-}
-
-#main .side .action-list > li{
-    background: #ccc;
-    border-radius: 3px;
-    padding: 5px 15px;
-    cursor: pointer;
-    transition: background .3s;
-}
-#main .side .action-list > li:hover{
-    background: #bbb;
-}
-
-#main .side .action-list > li.disabled{
-    background: #ccc;
-    opacity: 0.5;
-    cursor: default;
-}
-
-#main .demo-co{
-    background: url(bg.gif);
-    padding: 50px;
-    overflow: hidden;
-    border-radius: 5px;
-    position: relative;
-}
-
-
-
-
-
-@import "helper-scss/helper";

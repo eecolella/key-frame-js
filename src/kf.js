@@ -1,6 +1,3 @@
-
-
-
 window.kf = (function (document, undefined) {
 
     return ({
@@ -21,13 +18,13 @@ window.kf = (function (document, undefined) {
                 delete kf.name;
 
                 for (var key in kf) {
-                    css += key + "{";
+                    css += key + '{';
                     for (var prop in kf[key])
-                        css += prop + ":" + kf[key][prop] + ";";
-                    css += "}";
+                        css += prop + ':' + kf[key][prop] + ';';
+                    css += '}';
                 }
 
-                if(document.getElementById(name))
+                if (document.getElementById(name))
                     this.remove(name);
 
                 this._createStyle('@keyframes ' + name + '{' + css + '}@-webkit-keyframes ' + name + '{' + css + '}', name);
@@ -38,7 +35,7 @@ window.kf = (function (document, undefined) {
                 return false;
             }
         },
-        remove: function(name){
+        remove: function (name) {
             this._head.removeChild(document.getElementById(name));
             return this;
         },

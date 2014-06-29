@@ -17,41 +17,46 @@
 
 </head>
 <body>
+<div class="page">
+    <h1 class="title">key-frame-js examples</h1>
+    <ul>
+        <li id="wakeUp-demo" class="clearfix">
+            <h2>wakeUp (without jquery plugin)</h2>
 
-<ul id="main">
-    <li id="wakeUp-demo" class="clearfix">
-        <h1>wakeUp (without jquery plugin)</h1>
+            <div class="side">
+                <ul class="action-list clearfix">
+                    <li class="run">run</li>
+                    <li class="reset">reset</li>
+                </ul>
+            </div>
+            <div class="main">
+                <div>
+                    <div class="target"></div>
+                </div>
+            </div>
+        </li>
+        <li id="wakeUp-jquery-demo" class="clearfix">
 
-        <div class="side">
-            <ul class="action-list clearfix">
-                <li class="run">run</li>
-                <li class="reset">reset</li>
-            </ul>
-        </div>
-        <div class="demo-co">
-            <!--here the content-->
-            <div></div>
-        </div>
-    </li>
-    <li id="wakeUp-jquery-demo" class="clearfix">
-        <h1>wakeUp (with jquery plugin)</h1>
+            <h2>wakeUp (with jquery plugin)</h2>
 
-        <div class="side">
-            <ul class="action-list clearfix">
-                <li class="create">create</li>
-                <li class="remove disabled">remove & clean</li>
-                <li class="play disabled">play</li>
-                <li class="pause disabled">pause</li>
-                <li class="resume disabled">resume</li>
-                <li class="clean disabled">clean</li>
-            </ul>
-        </div>
-        <div class="demo-co">
-            <!--here the content-->
-            <div></div>
-        </div>
-    </li>
-</ul>
+            <div class="side">
+                <ul class="action-list clearfix">
+                    <li class="create">create</li>
+                    <li class="remove disabled">remove & clean</li>
+                    <li class="play disabled">play</li>
+                    <li class="pause disabled">pause</li>
+                    <li class="resume disabled">resume</li>
+                    <li class="clean disabled">clean</li>
+                </ul>
+            </div>
+            <div class="main">
+                <div>
+                    <div class="target"></div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
 
 <!-- build:js scripts/vendor.js -->
 <!-- bower:js -->
@@ -65,9 +70,8 @@
 <!-- endbuild -->
 
 
-
 <style>
-    #wakeUp-demo .demo-co > div, #wakeUp-jquery-demo .demo-co > div {
+    #wakeUp-demo .main .target, #wakeUp-jquery-demo .main .target {
         width: 200px;
         height: 123px;
         background: darkorange;
@@ -81,13 +85,13 @@
 <script>
     kf.template.wakeUp = function (perspective, name) {
         var per0 = 'perspective(' + perspective + 'px) rotateX(90deg)',
-                per60 = 'perspective(' + perspective + 'px) rotateX(-8deg)',
-                per62 = 'perspective(' + perspective + 'px) rotateX(8deg)',
-                per70 = 'perspective(' + perspective + 'px) rotateX(-6deg)',
-                per76 = 'perspective(' + perspective + 'px) rotateX(6deg)',
-                per84 = 'perspective(' + perspective + 'px) rotateX(-3deg)',
-                per92 = 'perspective(' + perspective + 'px) rotateX(3deg)',
-                per100 = 'perspective(' + perspective + 'px) rotateX(0deg)';
+            per60 = 'perspective(' + perspective + 'px) rotateX(-8deg)',
+            per62 = 'perspective(' + perspective + 'px) rotateX(8deg)',
+            per70 = 'perspective(' + perspective + 'px) rotateX(-6deg)',
+            per76 = 'perspective(' + perspective + 'px) rotateX(6deg)',
+            per84 = 'perspective(' + perspective + 'px) rotateX(-3deg)',
+            per92 = 'perspective(' + perspective + 'px) rotateX(3deg)',
+            per100 = 'perspective(' + perspective + 'px) rotateX(0deg)';
 
         return {
             name: name || 'wakeUp',
@@ -110,23 +114,23 @@
 
         $('#wakeUp-demo').on('click', '.run', function (e) {
 
-            var $target = $('#wakeUp-demo > .demo-co > div');
+            var $target = $('#wakeUp-demo .target');
 
             $target.addClass('wakeUp');
 
             //[animation-name] [animation-duration] [animation-timing-function] [animation-delay] [animation-iteration-count] [animation-direction] [animation-fill-mode] [animation-play-state]
             $target
-                    .css('animation', 'wakeUp 1.8s')
-                    .on('animationend webkitAnimationEnd mozAnimationEnd oAnimationEnd MSAnimationEnd', function () {
-                        console.log(9);
-                    })
-                    .on('animationiteration webkitAnimationIteration mozAnimationIteration MSAnimationIteration oAnimationIteration', function () {
-                        console-log(1);
-                    });
+                .css('animation', 'wakeUp 1.8s')
+                .on('animationend webkitAnimationEnd mozAnimationEnd oAnimationEnd MSAnimationEnd', function () {
+                    console.log(9);
+                })
+                .on('animationiteration webkitAnimationIteration mozAnimationIteration MSAnimationIteration oAnimationIteration', function () {
+                    console - log(1);
+                });
 
         }).on('click', '.reset', function (e) {
 
-            var $target = $('#wakeUp-demo > .demo-co > div');
+            var $target = $('#wakeUp-demo .target');
 
             $target.css('animation', '')
 
@@ -140,13 +144,13 @@
     $(function () {
 
         var $demo = $('#wakeUp-jquery-demo'),
-                $target = $demo.find('.demo-co > div'),
-                $create = $demo.find('.create'),
-                $remove = $demo.find('.remove'),
-                $play = $demo.find('.play'),
-                $pause = $demo.find('.pause'),
-                $resume = $demo.find('.resume'),
-                $clean = $demo.find('.clean');
+            $target = $demo.find('.main .target'),
+            $create = $demo.find('.create'),
+            $remove = $demo.find('.remove'),
+            $play = $demo.find('.play'),
+            $pause = $demo.find('.pause'),
+            $resume = $demo.find('.resume'),
+            $clean = $demo.find('.clean');
 
         $demo.on('click', '.create:not(.disabled)', function (e) {
 
@@ -228,7 +232,6 @@
         });
     });
 </script>
-
 
 
 </body>

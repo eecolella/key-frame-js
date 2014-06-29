@@ -1,0 +1,74 @@
+/* typography
+
+        @@@@@ @   @ @@@@@   @@@@   @@@@  @@@@@    @@   @@@@@  @    @ @   @
+          @    @ @  @    @ @    @ @    @ @    @  @  @  @    @ @    @  @ @
+          @     @   @    @ @    @ @      @    @ @    @ @    @ @@@@@@   @
+          @     @   @@@@@  @    @ @  @@@ @@@@@  @@@@@@ @@@@@  @    @   @
+          @     @   @      @    @ @    @ @   @  @    @ @      @    @   @
+          @     @   @       @@@@   @@@@  @    @ @    @ @      @    @   @
+*/
+
+//http://modularscale.com/scale/?px1=14&px2=20&ra1=1.618&ra2=0
+$__increment1: 1.429rem;
+$__increment2: 1.618rem;
+$__increment3: 2.311rem;
+$__increment4: 3rem;
+$__increment-1: 0.883rem;
+
+h1, h2, h3, h4, h5, h6{ font-weight: 700; }
+
+h1 {
+  font-size: $__increment4;
+  line-height: $__increment1 * 2;
+
+  margin-top: ($__increment1*1.5);
+  margin-bottom: ($__increment1/2);
+}
+h2 {
+  font-size: $__increment3;
+  line-height: $__increment1 * 2;
+
+  margin-top: ($__increment1*1.5);
+  margin-bottom: ($__increment1/2);
+}
+h3 {
+  font-size: $__increment2;
+  line-height: $__increment1 * 2;
+
+  margin-top: $__increment1;
+}
+h4 {
+  font-size: $__increment1;
+  line-height: $__increment1 * 2;
+
+  margin-top: $__increment1;
+}
+h5 {
+  margin-top: $__increment1;
+}
+h6 {
+  font-size: $__increment-1;
+
+  margin-top: $__increment1;
+}
+
+h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, h6:first-child{ margin-top: 0; }
+
+p + p {
+  margin-top: $__increment1;
+}
+
+html {
+  font-family: 'trebuchet ms', arial, sans-serif;
+  font-size: 16px;
+  color: #555;
+}
+
+.page{
+  line-height: $__increment1;
+  max-width: 80%;
+  margin: $__increment1 auto;
+  padding:  $__increment1;
+  background: #f5f5f5;
+  border-radius: 5px;
+}
